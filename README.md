@@ -495,7 +495,7 @@ You can see/edit/delete in Heroku dashboard all the environment variables that y
 
 This is it! If you followed the steps as presented you should have an app running on Heroku that reads secret keys from environment varibles, which are hidden from Github.
 
-*IMPORTANT: Now, please go ahead and delete your `/` route and `index()` method as users will be able to read your secret key if they know your application URL. This is just a basic example on how you can read configuration variables for different environments and by no means you want to expose this to the users.*
+**IMPORTANT: Now, please go ahead and delete your `/` route and `index()` method as users will be able to read your secret key if they know your application URL. This is just a basic example on how you can read configuration variables for different environments and by no means you want to expose this to the users.**
 
 ## Conclusion
 These are the instructions needed to create a deployable Heroku application using Flask and environment variables. In short, make sure you add:
