@@ -314,6 +314,11 @@ No value defined!
 
 SUCCESS, we deployed our first app in Heroku. So everytime we do some changes to our code we need to make sure we deploy, ie. push our code to heroku remote repository.
 
+If anything goes wrong and your application is not running, you can see the application logs with the command below:
+
+```bash
+heroku logs
+```
 
 We are not fully done though. We need to make sure our origin repository is also at the latest version:
 ```bash
@@ -328,7 +333,7 @@ When we've setup the port above, we noticed that Heroku works nicely in reading 
 ### Setup local environment variables
 First let's learn how we set those variables locally so I can make use of them in my code.
 
-I can see in the [Heroku documentation](https://devcenter.heroku.com/articles/heroku-local#set-up-your-local-environment-variables), that I can start my application locally using heroku comand line. Let's try to run the command and see what happens:
+I can see in the [Heroku documentation](https://devcenter.heroku.com/articles/heroku-local#set-up-your-local-environment-variables), that I can start my application locally using heroku command line. Let's try to run the command and see what happens:
 
 ```bash
 heroku local
