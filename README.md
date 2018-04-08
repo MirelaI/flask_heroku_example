@@ -1,8 +1,8 @@
 # Heroku Flask application
 
-This example sets a simple Flask app in Heroku while also reading config variables. Config variables are a great way for us to store secret keys, for example without publishing them to github.
+This example sets a simple Flask app in Heroku while also reading config variables. Config variables are a great way for us to store secret keys without publishing them to github.
 
-We saw in [Flask Config example](https://github.com/MirelaI/flask_config_example) how we can setup our configuration in a JSON formatted file and in the same time keep the configuration hidden in our GitHub repository while using [.gitignore](https://help.github.com/articles/ignoring-files/). These were the basic steps to achieve our goal, ie: Not publish your secret keys to GitHub.
+We saw in [Flask Config example](https://github.com/MirelaI/flask_config_example) how we can setup our configuration in a JSON formatted file and in the same time keep the configuration hidden in our GitHub repository while using [.gitignore](https://help.github.com/articles/ignoring-files/). These were the basic steps to achieve our goal: NOT to publish our secret keys to GitHub.
 
 Now, you might wonder, but how this will work in Heroku? As I still need to push the code on the Heroku remote master branch to deploy my application and if I keep my secret keys away from Github, Heroku will not know from where to read them.
 
@@ -10,7 +10,11 @@ This example shows you how you can setup your application to be deployable in He
 
 _Note: this example starts from zero, and some files might be different from what you have currently setup. If you already have your project setup and working, you do __NOT__ need to follow this steps. Just have a read through and understand how you setup a Heroku app and keep secret keys seret. Here we go..._
 
+_Note 2: You will see in this demo either config variables or environment variables, I am referring to the same thing :) as I we are going to use environment variables in order to store any configuration that we need for our application._
+
 ## Create a Flask application
+
+### Create your git repository
 
 You need to login into your GitHub repository and create your project repository. Once you've done that, go to your terminal and make a local copy of your repository and cd into it. See below the terminal commands:
 
@@ -19,7 +23,7 @@ git clone <your_repo_url>
 cd your_repo_folder
 ```
 
-## Make a simple Flask app using Jinjia
+### Make a simple Flask app using Jinjia
 I've created the following files.
 
 ```bash
@@ -38,7 +42,7 @@ At this point you should have the following structure:
     └── index.html
 ```
 
-In the `app.py` file I created a simple Flask app using the flask python module. See code below:
+In the `app.py` file, define a simple Flask app using the flask python module. See code below:
 
 ```python
 import os
@@ -57,7 +61,7 @@ def index():
 app.run(debug=True)
 ```
 
-I've saved the file and now, since the `index()` method renders the `index.html` template, I need to define the demplate. Edited `index.html` to contain the code below:
+I've saved the file and now, since the `index()` method renders the `index.html` template, I need to define the template. Edit `index.html` to contain the code below:
 
 ```html
 <!doctype html>
@@ -86,7 +90,7 @@ This will start your server at _http://localhost:5000/_. When you access in your
 
 ## Setup Heroku
 
-Now let's setup our application to be Heroku compatible. In order to make our application to run on Heroku we need to add the following files:
+In this section we are going to focus on how setup our application to be Heroku compatible. In order to make our application to run on Heroku we need to add the following files:
 
 ### Procfile
 
@@ -204,7 +208,7 @@ Type the following command:
 ```bash
 heroku create
 ```
-Here is the output that I saw in my console, bear in mind you for sure will have different urls:
+Here is the output that I saw in my console, bear in mind, you for sure will have different URLs:
 
 ```bash
 heroku create
@@ -212,7 +216,9 @@ Creating app... done, ⬢ murmuring-oasis-31169
 https://murmuring-oasis-31169.herokuapp.com/ | https://git.heroku.com/murmuring-oasis-31169.git
 ```
 
-Heroku will create an url for your application but also a git repository from where heroku will read your application code. So what is missing? Well Heroku created a repository but it's empty! So we need to push our code to the new heroku remote repository.
+Heroku will create an URL for your application and also a git repository from where Heroku will read your application code. So what is missing? Well Heroku created a repository but it's empty! We need to push our code to the new Heroku remote repository.
+
+_Note: in order to see what remote repositories you have setup for the current folder run `git remote -v` command. You should see the origin and heroku remote repositories._
 
 Let's commit our changes and push them to Heroku.
 
@@ -222,7 +228,7 @@ git status
 
 I have the following output, yours might be different:
 ```bash
- git status
+git status
 On branch master
 
 Initial commit
@@ -304,11 +310,17 @@ You should have your application available to access at the URL that Heroku crea
 No value defined!
 ```
 
-SUCCESS, we deployed our first app in Heroku. So everytime we do some changes to our code we need to make sure we deploy, ie. push our code to heroku remote branch.
+SUCCESS, we deployed our first app in Heroku. So everytime we do some changes to our code we need to make sure we deploy, ie. push our code to heroku remote repository.
 
+
+We are not fully done though. We need to make sure our origin repository is also at the latest version:
+```bash
+git push origin master
+```
+Now we have our application deployed and our Github repository is up to date with our code so our colleagues can pull to get the latest changes.
 
 ## Setup our secret keys
-When we setup the port above, we noticed that Heroku works nicely in reading environment variables and those for sure are not setup in git. They are setup on the webserver where your application runs. This is awesome, because it means I will be able to setup my secret keys in some environment variables!
+When we've setup the port above, we noticed that Heroku works nicely in reading environment variables and those for sure are not setup in git. They are setup on the webserver where your application runs. This is awesome, because it means we will be able to setup our secret keys in some environment variables!
 
 
 ### Setup local environment variables
@@ -455,15 +467,20 @@ Value: Some value!
 ```
 
 You can see/edit/delete in Heroku dashboard all the environment variables that you defined so far. Go the [Heroku Dashboard](https://dashboard.heroku.com/apps), click on your application -> Settings -> Reveal Config Vars. You should see all environment vars defined so far. Here is my view:
-[[https://github.com/MirelaI/flask_heroku_example/blob/master/config_vars.png]].
+![alt config vars](https://github.com/MirelaI/flask_heroku_example/blob/master/config_vars.png)
 
 This is it! If you followed the steps as presented you should have an app running on Heroku that reads secret keys from environment varibles, which are hidden from Github.
 
 
 ## Conclusion
-These are the instructions needed to create a deployable Heroku application using Flask and environment variables. In short, make sure you add the `Procfile`, `requirements.txt` and `runtime.txt` file to make your app deployable via Heroku.
+These are the instructions needed to create a deployable Heroku application using Flask and environment variables. In short, make sure you add:
+* `Procfile`, 
+* `requirements.txt`
+* `runtime.txt` 
+files to make your app deployable via Heroku.
 
-In order to keep your secret keys hidden, on local define a `.env` file where you put your keys in a KEY=VALUE format and on production run the heroku command:
+In order to keep your secret keys hidden, on local define a `.env` file where you put your keys in a KEY=VALUE format, see [`.env_example`](https://github.com/MirelaI/flask_heroku_example/blob/master/.env_example)
+ file in this repo. On production run the heroku command:
 ```
 heroku config:set SOME_SECRET_KEY=Some value
 ```
