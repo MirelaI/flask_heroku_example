@@ -331,7 +331,7 @@ When we've setup the port above, we noticed that Heroku works nicely in reading 
 
 
 ### Setup local environment variables
-First let's learn how we set those variables locally so I can make use of them in my code.
+First let's learn how we set those variables locally and make use of them in our code.
 
 I can see in the [Heroku documentation](https://devcenter.heroku.com/articles/heroku-local#set-up-your-local-environment-variables), that I can start my application locally using heroku command line. Let's try to run the command and see what happens:
 
@@ -353,13 +353,13 @@ Create the `.env` file in the root of your repository folder, `your_repo_folder`
 ```
 touch .env
 ```
-And let's define some environemnt variables in it. Add the following content you your `.env` file:
+And let's define some environemnt variables in it. Add the following content to your `.env` file:
 
 ```bash
 MAILGUN_SECRET_KEY=Some value
 ANOTHER_APP_SECRET_KEY=Different_value
 ```
-Now we are in a situation that we have a new file `.env` in our app and we need to avoid git publishing it. Run the `git status` command and you will see that git sees `.env` as an untracked file:
+Now we are in a situation that we have a new file `.env` in our app and we need to avoid git publishing it. Run the `git status` command and you will notice that `git` sees `.env` as an untracked file:
 
 ```bash
 git status
@@ -372,12 +372,12 @@ Untracked files:
 nothing added to commit but untracked files present (use "git add" to track)
 ```
 
-We want git to totally ignore this file as it contains our secret keys and we do not want to commit and push them ever. Let's git ignore this file:
+We want `git` to totally ignore this file as it contains our secret keys. We do not want to commit and push them ever. Let's git ignore this file:
 
 ```bash
 touch .gitignore
 ```
-And add the `.env` file as a string in your `.gitignore` file. Now type `git status` again and you should see:
+And add the `.env` file as a string in your `.gitignore` file, for guidance see this project [.gitgnore file](https://github.com/MirelaI/flask_heroku_example/blob/master/.gitignore). Now type `git status` again and you should see:
 
 ```
 git status
@@ -390,11 +390,12 @@ Untracked files:
 nothing added to commit but untracked files present (use "git add" to track)
 ```
 
-Now git has no idea about our `.env` file and we can go ahead and commit this change.
+From now on, `git` will have no idea about our `.env` file and we can go ahead and commit this change.
 
 Your directory structure should be simmilar to:
 ```bash
 .
+├── .env
 ├── Procfile
 ├── README.md
 ├── app.py
@@ -415,7 +416,7 @@ Start the application again using `heroku local`
 13:16:09 web.1   |   * Debugger PIN: 782-892-076
 
 ```
-Please note the OKAY message. Heroku now reads our environment variables from the `.env` file. Let's make use of it in our code. Amend `app.py` to read the mailgun secret key as an environemnt variable. In the `index()` method, replace `mailgun_secret_key_value = None` with
+Please note the __OKAY__ message. Heroku now reads our environment variables from the `.env` file. Let's make use of it in our code. Amend `app.py` to read the mailgun secret key as an environemnt variable. In the `index()` method, replace `mailgun_secret_key_value = None` with
 `mailgun_secret_key_value = os.environ.get('MAILGUN_SECRET_KEY', None)`. Now your `index()` method should be:
 
 ```pyhon
@@ -427,7 +428,7 @@ def index():
     # We will just display our mailgun secret key, nothing more.
     return render_template("index.html", value=mailgun_secret_key_value)
 ```
-Since we started our application with `debug=True` any change to our code will trigger a restart in our application. After the application was restarted go in your browser and access http://localhost:5000/, the following should be displayed in your browser:
+Since we started our application with `debug=True` any change to our code will trigger a restart of our application. After the application was restarted go in your browser and access http://localhost:5000/, the following should be displayed in your browser:
 
 ```
 Value: Some value!
@@ -452,9 +453,9 @@ You should see:
 ```
 No value defined!
 ```
-And that is correct. We definded our variables in `.env` which is hidden from git so Heroku has no idea about our newly defined variables. So this means we need to define our environment variables so the Heroku production environment, where our application is running.
+And that is correct. We definded our variables in `.env` which is hidden from `git`, so Heroku has no idea about our newly defined variables. This means that we need to define our environment variables so that Heroku production environment, where our application is running, knows about them.
 
-This is pretty simple, for every production environment varible you want to define or update you need to run from your terminal the following command, of course just replace the variable name and value:
+This is pretty simple, for every production environment varible that you want to define or update, you need to run from your terminal the following command, of course just replace the variable name and value:
 
 ```
 heroku config:set SOME_SECRET_KEY=Some value
@@ -499,7 +500,3 @@ or make use of the Heroku Dashboard.
 This repository contains a full example of the steps above and the `app.py` contains an extra route to be able to interogate our configuration via our Flask app. Have a read through the code and let me know if you have any questions. Also this example works perfectly if you already have a repository and just want to make it Heroku compatible, be sure you add the required files and your app should be deployable.
 
 Happy coding!
-
-
-
-
