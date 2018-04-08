@@ -46,10 +46,11 @@ from flask import Flask, render_template
 
 app = Flask('MyHerokuApp')
 
+# We will set this up a bit later, do not worry if we leave it as None for now.
+mailgun_secret_key_value = None
+
 @app.route('/')
 def index():
-    # We will set this up a bit later, do not worry if we leave it as None for now.
-    mailgun_secret_key_value = None
 
     # We will just display our mailgun secret key, nothing more.
     return render_template("index.html", value=mailgun_secret_key_value)
@@ -165,6 +166,9 @@ import os
 
 app = Flask('MyHerokuApp')
 
+# We will set this up a bit later, do not worry if we leave it as None for now.
+mailgun_secret_key_value = None
+
 # ADJUSTMENT: This is needed for Heroku configuration as in Heroku our
 # app will porbably not run on port 5000 as Heroku will automatically
 # assign a port for our application.
@@ -172,8 +176,6 @@ port = int(os.environ.get("PORT", 5000))
 
 @app.route('/')
 def index():
-    # Read the mailgun secret key from config variables
-    mailgun_secret_key_value = None
 
     # We will just display our mailgun secret key, nothing more.
     return render_template("index.html", value=mailgun_secret_key_value)
@@ -396,18 +398,30 @@ Start the application again using `heroku local`
 13:16:09 web.1   |   * Debugger PIN: 782-892-076
 
 ```
-Please note the OKAY message. Heroku now reads our environment variables from the `.env` file. Let's make use of it in our code. Amend `app.py` to read the mailgun secret key as an environemnt variable. In the `index()` method, replace `mailgun_secret_key_value = None` with
-`mailgun_secret_key_value = os.environ.get('MAILGUN_SECRET_KEY', None)`. Now your `index()` method should be:
+Please note the OKAY message. Heroku now reads our environment variables from the `.env` file. Let's make use of it in our code. Amend `app.py` to read the mailgun secret key as an environemnt variable. In `app.py`, replace `mailgun_secret_key_value = None` with
+`mailgun_secret_key_value = os.environ.get('MAILGUN_SECRET_KEY', None)`. Now your code should be:
 
 ```pyhon
+import os
+from flask import Flask, render_template
+
+app = Flask('MyHerokuApp')
+
+# ADJUSTMENT: Read the mailgun secret key from config variables
+mailgun_secret_key_value = os.environ.get('MAILGUN_SECRET_KEY', None)
+
+# This is needed for Heroku configuration as in Heroku our
+# app will porbably not run on port 5000 as Heroku will automatically
+# assign a port for our application
+port = int(os.environ.get("PORT", 5000))
+
 @app.route('/')
 def index():
-    # Read the mailgun secret key from config variables
-    mailgun_secret_key_value = os.environ.get('MAILGUN_SECRET_KEY', None)
 
     # We will just display our mailgun secret key, nothing more.
     return render_template("index.html", value=mailgun_secret_key_value)
 ```
+
 Since we started our application with `debug=True` any change to our code will trigger a restart in our application. After the application was restarted go in your browser and access http://localhost:5000/, the following should be displayed in your browser:
 
 ```
