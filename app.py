@@ -31,6 +31,8 @@ def key(config_key=None):
         config_key = config_key.upper()
         config_value = os.environ.get(config_key, None)
 
+    if key and config_value:
+        app.logger.info("Value of {} is {}.".format(config_key, config_value))
 
     # We will just display our mailgun secret key, nothing more.
     return render_template("keys.html", key=config_key, value=config_value)
