@@ -24,7 +24,10 @@ def key(config_key=None):
     config_value=None
 
     if (config_key):
-        # Make a convention to define config key upper cased.
+        # Advice: You should make a convention to define config key upper cased.
+        # otherwise you will have consistency issues when reading your keys.
+        # If you know they are always upper cased, you just need to uppercase
+        # what the config_key argument.
         config_key = config_key.upper()
         config_value = os.environ.get(config_key, None)
 
