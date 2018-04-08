@@ -1,6 +1,6 @@
 # Heroku Flask application
 
-This example sets a simple Flask app in Heroku while also reading config variables. Config variables are a great way for us to store secret keys without publishing them to github.
+This example sets a simple Flask app in Heroku while also reading configuration variables. Configuration variables are a great way for us to store secret keys without publishing them to github.
 
 We saw in [Flask Config example](https://github.com/MirelaI/flask_config_example) how we can setup our configuration in a JSON formatted file and in the same time keep the configuration hidden in our GitHub repository while using [.gitignore](https://help.github.com/articles/ignoring-files/). These were the basic steps to achieve our goal: NOT to publish our secret keys to GitHub.
 
@@ -8,9 +8,11 @@ Now, you might wonder, but how this will work in Heroku? As I still need to push
 
 This example shows you how you can setup your application to be deployable in Heroku and also still keep your keys secret. Do not worry if the steps for keeping your keys secret are not the same as in the config.json example, because it had to be addapted to work best with Heroku, but the principle is the same. We are just going to use a different configuration file.
 
-_Note: this example starts from zero, and some files might be different from what you have currently setup. If you already have your project setup and working, you do __NOT__ need to follow this steps. Just have a read through and understand how you setup a Heroku app and keep secret keys seret. Here we go..._
+_Note: this example starts from zero, and some files might be different from what you have currently setup. If you already have your project setup and working, you do __NOT__ need to follow the steps in `Create a Flask application`. You can skip until `Setup Heroku` section and be aware that some output that I've provided might be different from yours._
 
-_Note 2: You will see in this demo either config variables or environment variables, I am referring to the same thing :) as I we are going to use environment variables in order to store any configuration that we need for our application._
+_Note 2: You will see in this demo either config variables or environment variables, I am referring to the same thing :) as we are going to use environment variables in order to store any configuration that we need for our application._
+
+Here we go...
 
 ## Create a Flask application
 
@@ -61,7 +63,7 @@ def index():
 app.run(debug=True)
 ```
 
-I've saved the file and now, since the `index()` method renders the `index.html` template, I need to define the template. Edit `index.html` to contain the code below:
+I've saved the file and now, since the `index()` method renders the `index.html` template, I need to define the template. Edit `templates/index.html` to contain the code below:
 
 ```html
 <!doctype html>
@@ -489,7 +491,7 @@ heroku config:set SOME_SECRET_KEY=Some value
 ```
 or make use of the Heroku Dashboard.
 
-This repository contains a full example of the steps above and the `app.py` contains an extra route to be able to interogate our configuration via our Flask app. Have a read through the code and let me know if you have any questions.
+This repository contains a full example of the steps above and the `app.py` contains an extra route to be able to interogate our configuration via our Flask app. Have a read through the code and let me know if you have any questions. Also this example works perfectly if you already have a repository and just want to make it Heroku compatible, be sure you add the required files and your app should be deployable.
 
 Happy coding!
 
