@@ -474,30 +474,24 @@ This is it! If you followed the steps as presented you should have an app runnin
 
 ## Conclusion
 These are the instructions needed to create a deployable Heroku application using Flask and environment variables. In short, make sure you add:
-* `Procfile`, 
+* `Procfile`
 * `requirements.txt`
 * `runtime.txt` 
+
 files to make your app deployable via Heroku.
 
-In order to keep your secret keys hidden, on local define a `.env` file where you put your keys in a KEY=VALUE format, see [`.env_example`](https://github.com/MirelaI/flask_heroku_example/blob/master/.env_example)
- file in this repo. On production run the heroku command:
+In order to keep your secret keys hidden, on __local__ define a `.env` file where you put your keys in a KEY=VALUE format, see [`.env_example`](https://github.com/MirelaI/flask_heroku_example/blob/master/.env_example)
+file in this repo and then add it to the `.gitignore` file. 
+ 
+On __production__ run the heroku command:
 ```
 heroku config:set SOME_SECRET_KEY=Some value
 ```
 or make use of the Heroku Dashboard.
 
-This repository contains a full example of the steps below and an extra route to be able to interogate our configuration via our Flask app. Have a read through the code and let me know if you have any questions.
+This repository contains a full example of the steps above and the `app.py` contains an extra route to be able to interogate our configuration via our Flask app. Have a read through the code and let me know if you have any questions.
 
 Happy coding!
-
-
-
-
-
-
-
-
-
 
 
 
