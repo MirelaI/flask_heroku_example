@@ -488,15 +488,17 @@ These are the instructions needed to create a deployable Heroku application usin
 
 files to make your app deployable via Heroku.
 
-In order to keep your secret keys hidden, on __local__ define a `.env` file where you put your keys in a KEY=VALUE format, see [`.env_example`](https://github.com/MirelaI/flask_heroku_example/blob/master/.env_example)
+In order to keep your secret keys hidden, for __local__ environment(your laptop) define a `.env` file where you put your keys, in a KEY=VALUE format, see [`.env_example`](https://github.com/MirelaI/flask_heroku_example/blob/master/.env_example)
 file in this repo and then add it to the `.gitignore` file. 
  
-On __production__ run the heroku command:
+For __production__ environment, run the heroku command from your terminal (make sure you are in your project directory): 
 ```
 heroku config:set SOME_SECRET_KEY=Some value
 ```
 or make use of the Heroku Dashboard.
 
-This repository contains a full example of the steps above and the `app.py` contains an extra route to be able to interogate our configuration via our Flask app. Have a read through the code and let me know if you have any questions. Also this example works perfectly if you already have a repository and just want to make it Heroku compatible, be sure you add the required files and your app should be deployable.
+This repository contains a full example of the steps above and the `app.py` contains an extra route to be able to interogate our configuration via our Flask app. Have a read through the code and let me know if you have any questions.
+
+This example works perfectly if you already have a repository and just want to make it Heroku compatible, be sure you add the required files and your app should be deployable.
 
 Happy coding!
