@@ -349,7 +349,7 @@ Here is my output:
 13:01:50 web.1   |   * Debugger is active!
 13:01:50 web.1   |   * Debugger PIN: 782-892-076
 ```
-Perfect, Heroku started my app on my local environmnet, and now I am able to access it via: http://0.0.0.0:5000/ or http://localhost:5000/. You can see that it gives you a warn that there is not ENV file in our project. It's really important to remember that in the ENV file, named `.env` is where the environemnt variables will be defined. This .env variables will only be available locally.
+Perfect, Heroku started my app on my local environmnet, and now I am able to access it via: http://0.0.0.0:5000/ or http://localhost:5000/. You can see that it gives you a warn that there is not ENV file in our project. It's really important to remember that in the ENV file, named `.env` is where the environemnt variables will be defined. These `.env` variables will only be available locally.
 
 Create the `.env` file in the root of your repository folder, `your_repo_folder`:
 ```
@@ -518,4 +518,4 @@ This repository contains a full example of the steps above and the `app.py` cont
 
 This example works perfectly if you already have a repository and just want to make it Heroku compatible, be sure you add the required files and your app should be deployable.
 
-Happy coding!
+Happy coding!👩‍💻
