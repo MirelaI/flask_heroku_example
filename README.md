@@ -1,16 +1,16 @@
 # Heroku Flask application
 
-This example sets a simple Flask app in Heroku while also reading configuration variables. Configuration variables are a great way for us to store secret keys without publishing them to github.
+This example sets a simple Flask app in Heroku while also reading configuration variables. Configuration variables are a great way for us to store secret keys without publishing them to GitHub.
 
 We saw in [Flask Config example](https://github.com/MirelaI/flask_config_example) how we can setup our configuration in a JSON formatted file and in the same time keep the configuration hidden in our GitHub repository while using [.gitignore](https://help.github.com/articles/ignoring-files/). These were the basic steps to achieve our goal: NOT to publish our secret keys to GitHub.
 
-Now, you might wonder, but how this will work in Heroku? As I still need to push the code on the Heroku remote master branch to deploy my application and if I keep my secret keys away from Github, Heroku will not know from where to read them.
+Now, you might wonder, but how this will work in Heroku? As I still need to push the code on the Heroku remote master branch to deploy my application and if I keep my secret keys away from Github, Heroku will not know from where to read them. Will demo step by step how this is possible, so please join me in this journey.
 
-This example shows you how you can setup your application to be deployable in Heroku and also still keep your keys secret. Do not worry if the steps for keeping your keys secret are not the same as in the config.json example, because it had to be addapted to work best with Heroku, but the principle is the same. We are just going to use a different configuration file.
+This example shows you how you can setup your application to be deployable in Heroku and also still keep your keys secret. Do not worry if the steps for keeping your keys secret are not the same as in the Flask Config example](https://github.com/MirelaI/flask_config_example) example, because this example had to be adapted to work best with Heroku, but the principle is the same. We are just going to use a different type of configuration file.
 
-_Note: this example starts from zero, and some files might be different from what you have currently setup. If you already have your project setup and working, you do __NOT__ need to follow the steps in [`Create a Flask application`](https://github.com/MirelaI/flask_heroku_example#create-a-flask-application). You can skip until [`Setup Heroku`](https://github.com/MirelaI/flask_heroku_example#setup-heroku) section and be aware that some output that I've provided might be different from yours._
+_Note: this example starts from zero and some files might be different from what you have in the current setup. If you already have your project setup and working, you do __NOT__ need to follow the steps in [`Create a Flask application`](https://github.com/MirelaI/flask_heroku_example#create-a-flask-application). You can skip until [`Setup Heroku`](https://github.com/MirelaI/flask_heroku_example#setup-heroku) section and be aware that some output that I've provided might be a bit different from yours._
 
-_Note 2: You will see in this demo either config variables or environment variables, I am referring to the same thing :) as we are going to use environment variables in order to store any configuration that we need for our application._
+_Note 2: You will see me mentioning in this demo either config variables or environment variables, I am referring to the same thing :) as we are going to use environment variables in order to store any configuration that we need for our application._
 
 Here we go...
 
