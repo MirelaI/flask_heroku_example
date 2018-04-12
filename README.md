@@ -8,7 +8,7 @@ Now, you might wonder, but how this will work in Heroku? As I still need to push
 
 This example shows you how you can setup your application to be deployable in Heroku and also still keep your keys secret. Do not worry if the steps for keeping your keys secret are not the same as in the [Flask Config example](https://github.com/MirelaI/flask_config_example) example, because this example had to be adapted to work best with Heroku, but the principle is the same. We are just going to use a different type of configuration file.
 
-_Note: this example starts from zero and some files might be different from what you have in the current setup. If you already have your project setup and working, you do __NOT__ need to follow the steps in [`Create a Flask application`](https://github.com/MirelaI/flask_heroku_example#create-a-flask-application). You can skip until [`Setup Heroku`](https://github.com/MirelaI/flask_heroku_example#setup-heroku) section and be aware that some output that I've provided might be a bit different from yours._
+_Note: this example starts from zero and some files might be different from what you have in the current setup. If you already have your project setup and working, you do __NOT__ need to follow the steps in [`Create a Flask application`](https://github.com/MirelaI/flask_heroku_example#create-a-flask-application). You can skip until [`Setup Heroku`](https://github.com/MirelaI/flask_heroku_example#setup-heroku) section and be aware your application files are different than mine so you your file names and that some output that I've provided might be a bit different from yours. For example my flask application sits in `app.py`, yours might be named totally different, so use your filename when you see in my example `app.py`._
 
 _Note 2: You will see me mentioning in this demo either config variables or environment variables, I am referring to the same thing :) as we are going to use environment variables in order to store any configuration that we need for our application._
 
@@ -108,7 +108,9 @@ Add the following line in your `Procfile`:
 web: python app.py $PORT
 ```
 
-For now the line above is enough, as we are saying to Heroku start my webserver with the `python app.py` on the port `$PORT`. Port is the 5000 that you see when you start the application from your terminal. _http://localhost:5000/_. But since Heroku assignes random port numbers for each application we need to let Heroku read the port that it defined for our application. Hence trailing `$PORT` when we define our startup command.
+For now the line above is enough, as we are saying to Heroku start my `web` server with the `python app.py` on the port `$PORT`. **The command `python app.py` that I set in the Procfile is the exact command that I use to start my Flask application from my terminal. If your command is different, amend the Procfile to be sure it has the right start up command.***
+
+Port is the 5000 that you see when you start the application from your terminal. _http://localhost:5000/_. But since Heroku assignes random port numbers for each application we need to let Heroku read the port that it defined for our application. Hence trailing `$PORT` when we define our startup command.
 
 If you want different setups when you start your app, please have a read through [Prodfile documentation](https://devcenter.heroku.com/articles/procfile).
 
