@@ -3,11 +3,11 @@ from flask import Flask, render_template
 
 app = Flask('MyHerokuApp')
 
-# Read the mailgun secret key from config variables
+# Read the mailgun secret key from environment variables
 mailgun_secret_key_value = os.environ.get('MAILGUN_SECRET_KEY', None)
 
-# This is needed for Heroku configuration as in Heroku our
-# app will porbably not run on port 5000 as Heroku will automatically
+# This is needed for Heroku configuration, as in Heroku our
+# app will probably not run on port 5000, as Heroku will automatically
 # assign a port for our application
 port = int(os.environ.get("PORT", 5000))
 
