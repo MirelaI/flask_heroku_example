@@ -161,7 +161,7 @@ port = int(os.environ.get("PORT", 5000))
 If no port is defined, 5000 will be used as a default port, ie: when we run our application locally the port will be 5000 as we have no environment port variable defined. Last we need to make sure that the application will start on the specific port:
 
 ```python
-app.run(host='0.0.0.0', port=port, debug=True).
+app.run(host='0.0.0.0', port=port, debug=True)
 ```
 
 This is how your code should look after the adjustments above. You can see the adjustments we made to the initial code as they are marked with a `ADJUSTMENT` comment.
