@@ -4,7 +4,7 @@ This example sets a simple Flask app in Heroku while also reading configuration 
 
 We saw in [Flask Config example](https://github.com/MirelaI/flask_config_example) how we can setup our configuration in a JSON formatted file and in the same time keep the configuration hidden in our GitHub repository while using [.gitignore](https://help.github.com/articles/ignoring-files/). These were the basic steps to achieve our goal: NOT to publish our secret keys to GitHub.
 
-Now, you might wonder, but how this will work in Heroku? As I still need to push the code on the Heroku remote master branch to deploy my application and if I keep my secret keys away from Github, Heroku will not know from where to read them. Will demo step by step how this is possible, so please join me in this journey.
+Now, you might wonder, but how this will work in Heroku? As I still need to push the code on the Heroku remote main branch to deploy my application and if I keep my secret keys away from Github, Heroku will not know from where to read them. Will demo step by step how this is possible, so please join me in this journey.
 
 This example shows you how you can setup your application to be deployable in Heroku and also still keep your keys secret. Do not worry if the steps for keeping your keys secret are not the same as in the [Flask Config example](https://github.com/MirelaI/flask_config_example) example, because this example had to be adapted to work best with Heroku, but the principle is the same. We are just going to use a different type of configuration file.
 
@@ -232,10 +232,10 @@ Let's commit our changes and push them to Heroku.
 git status
 ```
 
-I have the following output, yours might be different:
+I have the following output, yours might be slightly different:
 ```bash
 git status
-On branch master
+On branch main
 
 Initial commit
 
@@ -261,12 +261,12 @@ git commit -am 'My first Flask app in Heroku'
 Now that I have my changes commited, I need to make Heroku aware of them, so let's go ahead and push them to the Heroku repository.
 
 ```
-git push heroku master
+git push heroku main
 ```
 
 My output is a bit noisy as it will install all the dependencies, this only happens the first time when you push.
 ```bash
-git push heroku master
+git push heroku main
 Counting objects: 9, done.
 Delta compression using up to 4 threads.
 Compressing objects: 100% (4/4), done.
@@ -307,7 +307,7 @@ remote:        https://murmuring-oasis-31169.herokuapp.com/ deployed to Heroku
 remote:
 remote: Verifying deploy... done.
 To https://git.heroku.com/murmuring-oasis-31169.git
- * [new branch]      master -> master
+ * [new branch]      main -> main
 ```
 
 You should have your application available to access at the URL that Heroku created for you, in my case https://murmuring-oasis-31169.herokuapp.com/. When accessing in your browser the URL you should see the same output as when we run the app locally:
@@ -326,7 +326,7 @@ heroku logs
 
 We are not fully done though. We need to make sure our origin repository is also at the latest version:
 ```bash
-git push origin master
+git push origin main
 ```
 Now we have our application deployed and our Github repository is up to date with our code so our colleagues can pull to get the latest changes.
 
@@ -367,7 +367,7 @@ Now we are in a situation that we have a new file `.env` in our app and we need 
 
 ```bash
 git status
-On branch master
+On branch main
 Untracked files:
   (use "git add <file>..." to include in what will be committed)
 
@@ -381,11 +381,11 @@ We want `git` to totally ignore this file as it contains our secret keys. We do 
 ```bash
 touch .gitignore
 ```
-And add the `.env` file as a string in your `.gitignore` file, for guidance see this project [.gitgnore file](https://github.com/MirelaI/flask_heroku_example/blob/master/.gitignore). Now type `git status` again and you should see:
+And add the `.env` file as a string in your `.gitignore` file, for guidance see this project [.gitgnore file](https://github.com/MirelaI/flask_heroku_example/blob/main/.gitignore). Now type `git status` again and you should see:
 
 ```
 git status
-On branch master
+On branch main
 Untracked files:
   (use "git add <file>..." to include in what will be committed)
 
@@ -462,7 +462,7 @@ git add .
 git commit -am "Make use of environment variables"
 
 # Deploy our changes to Heroku
-git push heroku master
+git push heroku main
 ```
 
 ### Setup production environment variables
@@ -493,7 +493,7 @@ Value: Some value!
 ```
 
 You can see/edit/delete in Heroku dashboard all the environment variables that you defined so far. Go the [Heroku Dashboard](https://dashboard.heroku.com/apps), click on your application -> Settings -> Reveal Config Vars. You should see all environment vars defined so far. Here is my view:
-![alt config vars](https://github.com/MirelaI/flask_heroku_example/blob/master/config_vars.png)
+![alt config vars](https://github.com/MirelaI/flask_heroku_example/blob/main/config_vars.png)
 
 This is it! If you followed the steps as presented you should have an app running on Heroku that reads secret keys from environment varibles, which are hidden from Github.
 
@@ -507,7 +507,7 @@ These are the instructions needed to create a deployable Heroku application usin
 
 files to make your app deployable via Heroku.
 
-In order to keep your secret keys hidden, for __local__ environment(your laptop) define a `.env` file where you put your keys, in a KEY=VALUE format, see [`.env_example`](https://github.com/MirelaI/flask_heroku_example/blob/master/.env_example)
+In order to keep your secret keys hidden, for __local__ environment(your laptop) define a `.env` file where you put your keys, in a KEY=VALUE format, see [`.env_example`](https://github.com/MirelaI/flask_heroku_example/blob/main/.env_example)
 file in this repo and then add it to the `.gitignore` file.
 
 For __production__ environment, run the heroku command from your terminal (make sure you are in your project directory):
